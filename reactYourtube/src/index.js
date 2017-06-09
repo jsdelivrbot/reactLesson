@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactDom from 'react-dom';
 import YoutubeApiSearch from 'youtube-api-search';
+import VideoDetail from './components/video_detail';
 
 import SearchBar from './components/search_bar'; //SearchBar bắt buộc viết hoa ký tự đầu tiên "S"
 import VideoList from './components/video_list'; //SearchBar bắt buộc viết hoa ký tự đầu tiên "S"
@@ -26,6 +27,7 @@ class App extends Component {
         return (
             <div>
                 <SearchBar/>
+                <VideoDetail video = { this.state.videos[0] } />
                 <VideoList videos = { this.state.videos }/>
             </div>
         );
