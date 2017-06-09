@@ -1,0 +1,23 @@
+#logo1 {
+    width: 100px;
+}
+#leftMenuNavbar {
+    margin-left: 30px;
+}
+.menubaritem:hover {
+    background-color:orange;
+}
+.price {
+    color: orange;
+    text-decoration: bold;
+}
+#SignupOrSignin {
+    width: 30%;
+    margin-left: 30%;
+}
+#shoppingCart {
+    border-radius: 2px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 5%;
+}
