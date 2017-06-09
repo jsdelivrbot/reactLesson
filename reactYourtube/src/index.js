@@ -1,15 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import React from "react";
+import ReactDom from 'react-dom';
+import SearchBar from './components/search_bar'; //SearchBar bắt buộc viết hoa ký tự đầu tiên "S"
+const API_KEY = 'AIzaSyB4sG5i9jS3PC1pa4pj4ZjgG8XmjM8NVzE';
+//create new compoment
+const App = ()=>{
+    return (
+    <div>
+        <SearchBar/>
+    </div>
+    );
+}
 
-import App from './components/app';
-import reducers from './reducers';
-
-const createStoreWithMiddleware = applyMiddleware()(createStore);
-
-ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <App />
-  </Provider>
-  , document.querySelector('.container'));
+ReactDom.render(<App />, document.querySelector(".container"));
