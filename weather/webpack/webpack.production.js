@@ -4,7 +4,7 @@ const webpackMerge = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
 module.exports = webpackMerge(commonConfig, {
     output: {
-        path: path.resolve('dist'),
+        path: __dirname,
         filename: 'bundle.js'
     },
     plugins: [

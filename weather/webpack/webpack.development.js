@@ -5,7 +5,7 @@ const commonConfig = require('./webpack.common');
 
 module.exports = webpackMerge(commonConfig, {
     output: {
-        path: path.resolve('dist'),
+        path: __dirname,
         filename: 'bundle.js'
     },
     devServer: {
