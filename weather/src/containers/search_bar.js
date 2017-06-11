@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-
-export default class SearchBar extends Component {
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {fetchWeather} from '../actions/index';
+class SearchBar extends Component {
     constructor(props){
         super(props);
         this.state = { term: '' };
@@ -8,6 +10,7 @@ export default class SearchBar extends Component {
         //của phương thức onInputChange.
         //Từ khóa này chỉ cho javascript biết từ khóa this trong phương thức sẽ tham chiếu đến component
         this.onInputChange = this.onInputChange.bind(this);
+        this.onFormSubmit = this.onFormSubmit.bind(this);
     }
 
     onInputChange(event){
@@ -16,7 +19,8 @@ export default class SearchBar extends Component {
     onFormSubmit(event){
         event.preventDefault();
 
-        
+        this.props.fetchWeather(this.state.term);
+        this.setState({term: ''});
     }
     render() {
         return (
@@ -33,3 +37,9 @@ export default class SearchBar extends Component {
         );
     };
 }
+
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({ fetchWeather}, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(SearchBar);
