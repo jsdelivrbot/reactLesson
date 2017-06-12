@@ -11,7 +11,8 @@ const compiler = webpack(webpackConfig);
 app.use(webpackMiddleware(compiler, {
     hot:true,
     noInfo: true, 
-    publicPath: webpackConfig.output.publicPath
+    publicPath: webpackConfig.output.publicPath,
+    contentBase: '/'
 }));
 
 app.use(webpackHotMiddleware(compiler));

@@ -2,7 +2,11 @@ import path from 'path';
 import webpack from 'webpack';
 export default {
     devtool: 'eval-source-map',
-    entry: path.join(__dirname, '/client/index.js'),
+    entry: {
+        
+        main: ['webpack-hot-middleware/client' , path.join(__dirname, '/client/index.js')]
+    },
+        
     output: {
         path: '/',
         // filename: 'bundle.js'
