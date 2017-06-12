@@ -19,7 +19,7 @@ app.use(webpackHotMiddleware(compiler));
 
 app.use(express.static(path.resolve('server')));
 
-app.get('/', (req, res, next)=>{
+app.get('/*', (req, res, next)=>{
     res.sendFile(path.join(__dirname, './index.html'));
 });
 
