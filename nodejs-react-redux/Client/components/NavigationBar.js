@@ -9,14 +9,6 @@ export default ()=>{
                         Son<strong className = "text-warning">CatTuong</strong>
                     </NavLink>
                 </div>
-                <div className="collapse navbar-collapse">
-                    <ul className="nav navbar">
-                        <li className="nav navbar-nav">
-                            <Link to = "products">Sản phẩm</Link>
-                        </li>
-                        
-                    </ul>
-                </div>
 
                 <div className="collapse navbar-collapse">
                     <ul className="nav navbar navbar-right">

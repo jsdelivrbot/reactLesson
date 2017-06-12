@@ -1,9 +1,16 @@
 import React from 'react';
-
-export default function(){
-    return (
-        <div id = "signup">
-            <h1>Đăng Ký</h1>
-        </div>
-    );
+import SignupForm from './signupForm';
+class signup extends React.Component{
+    render(){
+        return (
+            <div id = "signup">
+                <div className="row">
+                    <div className="col-md-4 col-md-offset-4">
+                        <SignupForm/>
+                    </div>
+                </div>
+            </div>
+        );
+    };
 }
+export default signup;

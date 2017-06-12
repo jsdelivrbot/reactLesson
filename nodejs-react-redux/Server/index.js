@@ -19,6 +19,15 @@ app.use(webpackHotMiddleware(compiler));
 
 app.use(express.static(path.resolve('server')));
 
+app.post('/api/users', function(req, res, next){
+    res.json({
+        message: "success"
+    });
+});
+
+
+
+
 app.get('/*', (req, res, next)=>{
     res.sendFile(path.join(__dirname, './index.html'));
 });
