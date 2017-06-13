@@ -12,7 +12,8 @@ class SignupForm extends React.Component {
             email: '',
             password: '',
             passwordConfirm: '',
-            gender: ''
+            gender: '',
+            errors: {}
         }
         this.onUsernameChanged = this.onUsernameChanged.bind(this);
         this.onEmailChanged = this.onEmailChanged.bind(this);
@@ -37,9 +38,19 @@ class SignupForm extends React.Component {
         this.setState({gender: e.target.value});
     }
     onSubmit(e){
+        this.setState({errors: {}});
         e.preventDefault();
         // axios.post('/api/users', {user: this.state});
-        this.props.userSignupRequest(this.state);
+        
+        this.props.userSignupRequest(this.state)
+        .then(
+            data=>{
+                if(data.error){
+                    this.setState({errors: data.payload.response.data});
+                }
+            }
+        )
+        
     }
     render(){
         return (
@@ -52,6 +63,7 @@ class SignupForm extends React.Component {
                     value = {this.state.username}
                     onChange = {this.onUsernameChanged}
                     name = "username" required/>
+                    {this.state.errors.username && <span className = "help-block">{this.state.errors.username}</span>}
                 </div>
                 <div className="form-group">
                     <label className="control-label">Email</label>
@@ -59,6 +71,7 @@ class SignupForm extends React.Component {
                     value = {this.state.email}
                     onChange = {this.onEmailChanged}
                     name = "email" required/>
+                    {this.state.errors.email && <span className = "help-block">{this.state.errors.email}</span>}
                 </div>
                 <div className="form-group">
                     <label className="control-label">Mật Khẩu</label>
@@ -66,6 +79,7 @@ class SignupForm extends React.Component {
                     value = {this.state.password}
                     onChange = {this.onPasswordChanged}
                     name = "password" required/>
+                    {this.state.errors.password && <span className = "help-block">{this.state.errors.password}</span>}
                 </div>
                 <div className="form-group">
                     <label className="control-label">Nhập lại mật khẩu</label>

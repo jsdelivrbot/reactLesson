@@ -9,7 +9,7 @@ export function userSignupRequest(userData){
     const request = axios.post('/api/users', {user: userData});
     console.log("request = ", request)
     return {
-    type: SIGNUP_USER,
-    payload: request
+        type: SIGNUP_USER,
+        payload: request
   };
 }
