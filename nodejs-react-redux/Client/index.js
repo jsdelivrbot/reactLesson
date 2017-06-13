@@ -5,14 +5,12 @@ import {Provider} from 'react-redux';
 import thunk from 'redux-thunk'
 import App from './components/App';
 import {createStore, applyMiddleware} from 'redux';
+import reducers from './reducers';
 
-const store = createStore(
-    // (state = {}) => sate,
-    applyMiddleware(thunk)
-);
-// const store = applyMiddleware()(createStore);
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+
 render(
-    <Provider store = {store} >
+    <Provider store={createStoreWithMiddleware(reducers)} >
         <BrowserRouter>
             <App/>
         </BrowserRouter>

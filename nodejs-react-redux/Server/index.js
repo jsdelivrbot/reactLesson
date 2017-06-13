@@ -4,6 +4,7 @@ import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware'
 import webpackConfig from '../webpack.config.dev';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import bodyParser from 'body-parser';
 let app = express();
 
 const compiler = webpack(webpackConfig);
@@ -18,10 +19,13 @@ app.use(webpackMiddleware(compiler, {
 app.use(webpackHotMiddleware(compiler));
 
 app.use(express.static(path.resolve('server')));
+app.use(bodyParser.json());
 
 app.post('/api/users', function(req, res, next){
+    console.log(req.body.user);
     res.json({
-        message: "success"
+        message: "success",
+        user: req.body.user
     });
 });
 

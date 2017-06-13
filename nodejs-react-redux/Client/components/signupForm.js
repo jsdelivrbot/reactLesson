@@ -1,5 +1,8 @@
 import React from 'react';
 // import axios from 'axios';
+import {connect} from 'react-redux';
+import {userSignupRequest} from '../actions/signupActions';
+import {bindActionCreators} from 'redux';
 
 class SignupForm extends React.Component {
     constructor(props){
@@ -88,5 +91,8 @@ class SignupForm extends React.Component {
         );
     }
 }
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({ userSignupRequest}, dispatch);
+}
 
-export default SignupForm;
+export default connect((state)=> {return {}}, mapDispatchToProps)(SignupForm);
