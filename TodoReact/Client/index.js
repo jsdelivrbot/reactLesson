@@ -6,3 +6,5 @@ render(
     <App/>
     , document.getElementById('app')
     );
+
+require('./example');
