@@ -3,7 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {userSignupRequest} from '../actions/signupActions';
 import {bindActionCreators} from 'redux';
-
+import validateInputUserSignup from '../../shared/validateInputUserSignup';
 class SignupForm extends React.Component {
     constructor(props){
         super(props);
@@ -41,15 +41,21 @@ class SignupForm extends React.Component {
         this.setState({errors: {}});
         e.preventDefault();
         // axios.post('/api/users', {user: this.state});
-        
-        this.props.userSignupRequest(this.state)
-        .then(
-            data=>{
-                if(data.error){
-                    this.setState({errors: data.payload.response.data});
+        const {isValid, errors} = validateInputUserSignup(this.state);
+        if(isValid){
+            console.log(`is valid = ${isValid}`)
+            this.props.userSignupRequest(this.state)
+            .then(
+                data=>{
+                    if(data.error){
+                        this.setState({errors: data.payload.response.data});
+                    }
                 }
-            }
-        )
+            )
+        }
+        else{
+            this.setState({errors: errors});
+        }
         
     }
     render(){
@@ -62,7 +68,7 @@ class SignupForm extends React.Component {
                     <input type="text" className="form-control" 
                     value = {this.state.username}
                     onChange = {this.onUsernameChanged}
-                    name = "username" required/>
+                    name = "username" />
                     {this.state.errors.username && <span className = "help-block">{this.state.errors.username}</span>}
                 </div>
                 <div className="form-group">
@@ -70,7 +76,7 @@ class SignupForm extends React.Component {
                     <input type="email" className="form-control" 
                     value = {this.state.email}
                     onChange = {this.onEmailChanged}
-                    name = "email" required/>
+                    name = "email" />
                     {this.state.errors.email && <span className = "help-block">{this.state.errors.email}</span>}
                 </div>
                 <div className="form-group">
@@ -78,7 +84,7 @@ class SignupForm extends React.Component {
                     <input type="password" className="form-control" 
                     value = {this.state.password}
                     onChange = {this.onPasswordChanged}
-                    name = "password" required/>
+                    name = "password" />
                     {this.state.errors.password && <span className = "help-block">{this.state.errors.password}</span>}
                 </div>
                 <div className="form-group">
@@ -86,7 +92,7 @@ class SignupForm extends React.Component {
                     <input type="password" className="form-control" 
                     value = {this.state.passwordConfirm}
                     onChange = {this.onPasswordConfirmChanged}
-                    name = "passwordConfirm" required/>
+                    name = "passwordConfirm" />
                 </div>
                 <div className="form-group">
                     <label className="control-label">Giới Tính</label>
@@ -97,6 +103,7 @@ class SignupForm extends React.Component {
                         <option key = "0" value="0">Nam</option>
                         <option key = "1" value="1" >Nữ</option>
                     </select>
+                    {this.state.errors.password && <span className = "help-block">{this.state.errors.password}</span>}
                 </div>
                 <div className="form-group">
                     <button className="btn btn-primary">Đăng ký</button>
