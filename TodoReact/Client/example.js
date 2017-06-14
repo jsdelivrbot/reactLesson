@@ -41,14 +41,14 @@ store.subscribe(()=>{
     // document.getElementById('redux-detail').innerHTML = JSON.stringify(store.getState());
 })
 
-store.dispatch({type: 'TOGGLE_IS_ADDING_NOTE'})
+// store.dispatch({type: 'TOGGLE_IS_ADDING_NOTE'})
 
-store.dispatch({
-    type: 'ADD_NEW_NOTE',
-    newNote: 'GraphQL'
-})
+// store.dispatch({
+//     type: 'ADD_NEW_NOTE',
+//     newNote: 'GraphQL'
+// })
 
-store.dispatch({
-    type: 'REMOVE_NOTE',
-    IndexRemoveNote: 3
-});
+// store.dispatch({
+//     type: 'REMOVE_NOTE',
+//     IndexRemoveNote: 3
+// });

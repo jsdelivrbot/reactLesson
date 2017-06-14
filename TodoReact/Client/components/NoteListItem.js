@@ -1,8 +1,16 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
 class NoteListItem extends React.Component {
     remove(){
-        let {index, handleRemove} = this.props;
-        handleRemove(index);
+        // let {index, handleRemove} = this.props;
+        // handleRemove(index);
+
+        const { dispatch, index } = this.props;
+        dispatch({
+            type: 'REMOVE_NOTE',
+            IndexRemoveNote: index
+        })
     }
     render(){
         return(
@@ -13,4 +21,6 @@ class NoteListItem extends React.Component {
         );
     }
 }
-export default NoteListItem;
+export default connect(function(state){
+    return state
+})(NoteListItem);

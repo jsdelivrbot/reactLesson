@@ -1,14 +1,16 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
 class NoteAddForm extends React.Component {
     constructor(props){
         super(props);
         this.state = { 
-            note : "",
-            isAdding: false
+            note : ""
+            // isAdding: false
         };
         this.onNoteChange = this.onNoteChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.onAdd = this.onAdd.bind(this);
+        this.onTonggle = this.onTonggle.bind(this);
     }
     onNoteChange(e){
         this.setState({note: e.target.value});
@@ -16,17 +18,28 @@ class NoteAddForm extends React.Component {
     }
     onSubmit(e){
         e.preventDefault();
-        this.props.handleAddNote(this.state.note);
-        this.setState({
-            note: '',
-            isAdding: !this.state.isAdding
+        // this.props.handleAddNote(this.state.note);
+        // this.setState({
+        //     note: '',
+        //     isAdding: !this.state.isAdding
+        // });
+        const {dispatch} = this.props;
+        dispatch({
+            type: 'ADD_NEW_NOTE',
+            newNote: this.state.note
+        });
+        this.setState({ note: ''});
+        this.onTonggle();
+    }
+    onTonggle(){
+        // const dispatch = this.props.dispatch;
+        const {dispatch} = this.props;
+        dispatch({
+            type: 'TOGGLE_IS_ADDING_NOTE'
         });
     }
-    onAdd(){
-        this.setState({isAdding: !this.state.isAdding});
-    }
     render(){
-        if(this.state.isAdding){
+        if(this.props.isAdding){
             return(
                 <div>
                 <form onSubmit = {this.onSubmit}  action="">
@@ -41,10 +54,12 @@ class NoteAddForm extends React.Component {
         else {
             return(
                 <div>
-                    <button onClick = {this.onAdd} className="btn btn-success">+</button>
+                    <button onClick = {this.onTonggle} className="btn btn-success">+</button>
                 </div>
             );
         }
     }
 }
-export default NoteAddForm;
+export default connect(function(state){
+    return { isAdding: state.isAdding }
+})(NoteAddForm);
