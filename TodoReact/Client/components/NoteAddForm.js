@@ -9,8 +9,8 @@ class NoteAddForm extends React.Component {
     onNoteChange(e){
         this.setState({note: e.target.value});
     }
-    onAddNote(){
-        e.prevenDefault();
+    onAddNote(e){
+        e.preventDefault();
         this.props.handleAddNote(this.state.note);
         this.setState({note: ''});
     }
@@ -18,9 +18,9 @@ class NoteAddForm extends React.Component {
         return(
             <div>
                <h1>Add</h1>
-               <form onSubmit = {e=>this.onAddNote(e)}  action="">
+               <form onSubmit = {this.onAddNote}  action="">
                     <div className="input-group">
-                        <input onChange = {e=>this.onNoteChange(e)} type="text"/>
+                        <input value = {this.state.note} onChange = {this.onNoteChange} type="text"/>
                         <button className="btn btn-primary">Add</button>
                     </div>
                </form>

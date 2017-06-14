@@ -25,9 +25,9 @@ class NoteList extends React.Component {
         this.setState(this.state);
     }
     onAddNewNote(note){
-        // console.log(note);
-        //  this.state.mang.push(note);
-        // this.setState(this.state);
+        //console.log(note);
+        this.state.mang.push(note);
+        this.setState(this.state);
     }
     render(){
         return(
