@@ -1,16 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
+import {RemoveNoteActions} from '../actions/RemoveNoteAction';
+import {bindActionCreators} from 'redux';
 class NoteListItem extends React.Component {
     remove(){
-        // let {index, handleRemove} = this.props;
-        // handleRemove(index);
-
-        const { dispatch, index } = this.props;
-        dispatch({
-            type: 'REMOVE_NOTE',
-            IndexRemoveNote: index
-        })
+       this.props.RemoveNoteActions(this.props.index);
     }
     render(){
         return(
@@ -21,6 +15,11 @@ class NoteListItem extends React.Component {
         );
     }
 }
+
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({ RemoveNoteActions }, dispatch);
+}
+
 export default connect(function(state){
     return state
-})(NoteListItem);
+}, mapDispatchToProps)(NoteListItem);

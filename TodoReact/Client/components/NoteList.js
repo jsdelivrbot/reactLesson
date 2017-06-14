@@ -6,10 +6,7 @@ import {connect} from 'react-redux';
 class NoteList extends React.Component {
     constructor(props){
         super(props);
-        // this.state = {mang: ['android', 'javascript', 'Nodejs','React']};
         this.rederItem = this.rederItem.bind(this);
-        // this.remove = this.remove.bind(this);
-        // this.onAddNewNote = this.onAddNewNote.bind(this);
     }
     rederItem(){
         return this.props.mang.map((e,i)=>{
@@ -21,15 +18,6 @@ class NoteList extends React.Component {
                 key = {i}>{e}</NoteListItem>
         });
     }
-    // remove(index){
-    //     this.state.mang.splice(index, 1);
-    //     this.setState(this.state);
-    // }
-    // onAddNewNote(note){
-    //     //console.log(note);
-    //     this.state.mang.push(note);
-    //     this.setState(this.state);
-    // }
     render(){
         return(
             <div>
@@ -41,8 +29,6 @@ class NoteList extends React.Component {
 }
 //Chuyển giá trị từ store.state vào props.state
 export default connect(function(state){
-    console.log("state ", state);
-    console.log("this.state ", this.state);
     return {
         mang: state.mang
     }

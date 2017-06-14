@@ -1,5 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {AddNewNoteAction, IsAddNewNoteAction} from '../actions/AddNewNoteAction';
 
 class NoteAddForm extends React.Component {
     constructor(props){
@@ -18,25 +20,12 @@ class NoteAddForm extends React.Component {
     }
     onSubmit(e){
         e.preventDefault();
-        // this.props.handleAddNote(this.state.note);
-        // this.setState({
-        //     note: '',
-        //     isAdding: !this.state.isAdding
-        // });
-        const {dispatch} = this.props;
-        dispatch({
-            type: 'ADD_NEW_NOTE',
-            newNote: this.state.note
-        });
-        this.setState({ note: ''});
+        this.props.AddNewNoteAction(this.state.note);
         this.onTonggle();
+        this.setState({note: ''});
     }
     onTonggle(){
-        // const dispatch = this.props.dispatch;
-        const {dispatch} = this.props;
-        dispatch({
-            type: 'TOGGLE_IS_ADDING_NOTE'
-        });
+        this.props.IsAddNewNoteAction(this.props.isAdding);
     }
     render(){
         if(this.props.isAdding){
@@ -60,6 +49,10 @@ class NoteAddForm extends React.Component {
         }
     }
 }
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({AddNewNoteAction, IsAddNewNoteAction}, dispatch);
+}
+
 export default connect(function(state){
     return { isAdding: state.isAdding }
-})(NoteAddForm);
+}, mapDispatchToProps)(NoteAddForm);
