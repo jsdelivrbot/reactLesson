@@ -12,6 +12,7 @@ class NoteAddForm extends React.Component {
     }
     onNoteChange(e){
         this.setState({note: e.target.value});
+        
     }
     onSubmit(e){
         e.preventDefault();
