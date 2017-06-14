@@ -6,7 +6,7 @@ const defaultState = {
     isAdding: false
 };
 
-const mangReducer = (state = ['android', 'javascript', 'Nodejs','React'], action)=>{
+const mangReducer = (state = ['android', 'javascript', 'Nodejs','React', 'react native'], action)=>{
     switch(action.type){        
         case 'ADD_NEW_NOTE':
             return [...state, action.newNote]
@@ -28,17 +28,17 @@ const isAddingReducer = (state = false, action)=>{
     }
 }
 
-const reducer = combineReducers({
+ const reducer = combineReducers({
     mang: mangReducer,
     isAdding: isAddingReducer
 })
 
-const store = createStore(reducer, compose(
+export const store = createStore(reducer, compose(
     window.devToolsExtension? window.devToolsExtension() : f=> f
     ));
 store.subscribe(()=>{
     console.log("store has been change: ",store.getState());
-    document.getElementById('redux-detail').innerHTML = JSON.stringify(store.getState());
+    // document.getElementById('redux-detail').innerHTML = JSON.stringify(store.getState());
 })
 
 store.dispatch({type: 'TOGGLE_IS_ADDING_NOTE'})
