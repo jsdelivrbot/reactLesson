@@ -1,31 +1,44 @@
 
 
-import redux, {createStore, compose} from 'redux';
+import redux, {createStore, compose, combineReducers} from 'redux';
 const defaultState = {
     mang: ['android', 'javascript', 'Nodejs','React'],
     isAdding: false
 };
-const reducer = (state = defaultState, action)=>{
-    switch(action.type){
-        case 'TOGGLE_IS_ADDING_NOTE':
-            return {...state, isAdding: !state.isAdding}
+
+const mangReducer = (state = ['android', 'javascript', 'Nodejs','React'], action)=>{
+    switch(action.type){        
         case 'ADD_NEW_NOTE':
-            return {...state, mang: [...state.mang, action.newNote]}
+            return [...state, action.newNote]
         case 'REMOVE_NOTE':
-            return {...state, mang:[...state.mang.filter((e, i)=>{
+            return [...state.filter((e, i)=>{
                 return i != action.IndexRemoveNote;
-            })]}
+                })
+            ]
         default:
             return state;
     }
-    
 }
+const isAddingReducer = (state = false, action)=>{
+    switch(action.type){        
+        case 'TOGGLE_IS_ADDING_NOTE':
+            return !state;
+        default:
+            return state;
+    }
+}
+
+const reducer = combineReducers({
+    mang: mangReducer,
+    isAdding: isAddingReducer
+})
 
 const store = createStore(reducer, compose(
     window.devToolsExtension? window.devToolsExtension() : f=> f
     ));
 store.subscribe(()=>{
-    console.log("store has been change: ", store.getState());
+    console.log("store has been change: ",store.getState());
+    document.getElementById('redux-detail').innerHTML = JSON.stringify(store.getState());
 })
 
 store.dispatch({type: 'TOGGLE_IS_ADDING_NOTE'})
