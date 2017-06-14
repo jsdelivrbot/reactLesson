@@ -1,6 +1,6 @@
 
 
-import redux, {createStore} from 'redux';
+import redux, {createStore, compose} from 'redux';
 const defaultState = {
     mang: ['android', 'javascript', 'Nodejs','React'],
     isAdding: false
@@ -12,8 +12,8 @@ const reducer = (state = defaultState, action)=>{
         case 'ADD_NEW_NOTE':
             return {...state, mang: [...state.mang, action.newNote]}
         case 'REMOVE_NOTE':
-            return {...state, mang:[...state.mang.slice((value, key)=>{
-                return key != action.IndexRemoveNote;
+            return {...state, mang:[...state.mang.filter((e, i)=>{
+                return i != action.IndexRemoveNote;
             })]}
         default:
             return state;
@@ -21,20 +21,21 @@ const reducer = (state = defaultState, action)=>{
     
 }
 
-const store = createStore(reducer);
-console.log('before dispatch ',store.getState());
+const store = createStore(reducer, compose(
+    window.devToolsExtension? window.devToolsExtension() : f=> f
+    ));
+store.subscribe(()=>{
+    console.log("store has been change: ", store.getState());
+})
+
 store.dispatch({type: 'TOGGLE_IS_ADDING_NOTE'})
-console.log('after dispatch ',store.getState());
 
 store.dispatch({
     type: 'ADD_NEW_NOTE',
     newNote: 'GraphQL'
 })
 
-console.log('after dispatch ADD_NEW_NOTE ',store.getState());
-
 store.dispatch({
     type: 'REMOVE_NOTE',
-    IndexRemoveNote: '4'
+    IndexRemoveNote: 3
 });
-console.log('after dispatch REMOVE_NOTE ',store.getState());
