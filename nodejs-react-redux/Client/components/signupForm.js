@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {userSignupRequest} from '../actions/signupActions';
 import {bindActionCreators} from 'redux';
 import validateInputUserSignup from '../../shared/validateInputUserSignup';
+import {hashHistory } from 'react-router';
+
 class SignupForm extends React.Component {
     constructor(props){
         super(props);
@@ -40,6 +42,7 @@ class SignupForm extends React.Component {
     onSubmit(e){
         this.setState({errors: {}});
         e.preventDefault();
+        console.log(this.props);
         // axios.post('/api/users', {user: this.state});
         const {isValid, errors} = validateInputUserSignup(this.state);
         if(isValid){
@@ -47,8 +50,13 @@ class SignupForm extends React.Component {
             this.props.userSignupRequest(this.state)
             .then(
                 data=>{
+                    
                     if(data.error){
                         this.setState({errors: data.payload.response.data});
+                       this.props.router.push('/');
+                    }
+                    else {
+                        this.props.router.push('/');
                     }
                 }
             )
