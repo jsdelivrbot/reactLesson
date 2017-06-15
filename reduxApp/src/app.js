@@ -1,30 +1,9 @@
 "use strict"
 import {createStore} from 'redux';
 //bước 3: định nghĩa reducer
-const reducer = function(state = {books: []}, action){
-    switch(action.type){
-        case "POST_BOOK":
-        return {books: [...state.books, ...action.payload]};
-        case "DELETE_BOOK":
-        return {books: state.books.filter(function(e, i){
-            return e.id != action.payload.id;
-        })};
-        case "UPDATE_BOOK":
-        const cloneBooks = [];
-        state.books.forEach(function(item){
-            if(item.id == action.payload.id){
-                item = action.payload;
-            }
-            cloneBooks.push(item);
-        });
-        return  {books: cloneBooks};
-
-        default:
-        return state;
-    }
-}
+import reducers from './reducers';
 //Bước 1: tạo 1 store
-const store = createStore(reducer);
+const store = createStore(reducers);
 
 store.subscribe(function(){
     console.log("current state is: ", store.getState());
