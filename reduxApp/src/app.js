@@ -1,10 +1,15 @@
 "use strict"
-import {createStore} from 'redux';
+import {createStore,  applyMiddleware, compose} from 'redux';
 import reducers from './reducers';
 import {addToCart} from './actions/cartActions';
 import { PostBook, DeleteBook, UpdateBook } from './actions/bookActions';
+import reduxLogger from 'redux-logger';
 
-const store = createStore(reducers);
+const store = createStore(reducers, /* preloadedState, */ compose(
+    // applyMiddleware(ReduxPromise),
+    applyMiddleware(reduxLogger()),
+    window.devToolsExtension? window.devToolsExtension() : f=> f
+  ));
 
 store.subscribe(function(){
     console.log("current state is: ", store.getState());
@@ -23,12 +28,26 @@ store.dispatch(PostBook([{
         discription: "in this book we are going to learn how to use nodejs and reactjs to development an application",
         price: 100
 }]));
-store.dispatch(PostBook([{    
+store.dispatch(PostBook([
+    {    
         id: 3,
         title: 'book 3',
         discription: "in this book we are going to learn how to use nodejs and reactjs to development an application",
         price: 100
-}]));
+    },
+    {    
+        id: 4,
+        title: 'book 4',
+        discription: "in this book we are going to learn how to use nodejs and reactjs to development an application",
+        price: 100
+    },
+    {    
+        id: 5,
+        title: 'book 5',
+        discription: "in this book we are going to learn how to use nodejs and reactjs to development an application",
+        price: 100
+    }
+]));
 
 //Delete
 store.dispatch(DeleteBook({id: 2 }));
