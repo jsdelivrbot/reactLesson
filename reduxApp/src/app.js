@@ -6,6 +6,7 @@ import { PostBook, DeleteBook, UpdateBook } from './actions/bookActions';
 import reduxLogger from 'redux-logger';
 import React from 'react';
 import {render} from 'react-dom';
+import {Provider} from 'react-redux';
 import BooksList from './components/pages/booksList';
 
 const store = createStore(reducers, /* preloadedState, */ compose(
@@ -14,9 +15,13 @@ const store = createStore(reducers, /* preloadedState, */ compose(
     window.devToolsExtension? window.devToolsExtension() : f=> f
   ));
 
-store.subscribe(function(){
-    console.log("current state is: ", store.getState());
-});
+
+render(
+    <Provider store = {store}>
+        <BooksList/>
+    </Provider>,
+    document.getElementById('app')
+);
 
 //bước 2: tạo action và dispatch actions
 store.dispatch(PostBook([{    
@@ -53,7 +58,7 @@ store.dispatch(PostBook([
 ]));
 
 //Delete
-store.dispatch(DeleteBook({id: 2 }));
+// store.dispatch(DeleteBook({id: 2 }));
 //update
 store.dispatch(UpdateBook(
     {
@@ -66,9 +71,4 @@ store.dispatch(UpdateBook(
 //Cart actions
 store.dispatch(addToCart([{id: 2}]));
 
-console.log("connected!");
 
-render(
-    <BooksList/>,
-    document.getElementById('app')
-);
