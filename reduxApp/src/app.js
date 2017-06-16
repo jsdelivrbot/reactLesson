@@ -4,6 +4,9 @@ import reducers from './reducers';
 import {addToCart} from './actions/cartActions';
 import { PostBook, DeleteBook, UpdateBook } from './actions/bookActions';
 import reduxLogger from 'redux-logger';
+import React from 'react';
+import {render} from 'react-dom';
+import BooksList from './components/pages/booksList';
 
 const store = createStore(reducers, /* preloadedState, */ compose(
     // applyMiddleware(ReduxPromise),
@@ -64,3 +67,8 @@ store.dispatch(UpdateBook(
 store.dispatch(addToCart([{id: 2}]));
 
 console.log("connected!");
+
+render(
+    <BooksList/>,
+    document.getElementById('app')
+);
