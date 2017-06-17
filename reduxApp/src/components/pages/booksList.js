@@ -18,9 +18,9 @@ class BooksList extends React.Component{
     render(){
         const bookList = this.props.books.map((book)=>{
             return (
-                <div id="book-item" className = "col-xs-12 col-sm-6 col-md-4"  key = {book.id}>
+                <div id="book-item" className = "col-xs-12 col-sm-6 col-md-4"  key = {book._id}>
                     <BookItem
-                        id = {book.id}
+                        _id = {book._id}
                         title = {book.title}
                         description = {book.discription}
                         price = {book.price}
@@ -37,12 +37,13 @@ class BooksList extends React.Component{
             // </Grid>
             <div className = "container">
                 <div id = "bookList" className="row"> 
+                <div className = "row">
+                        <Cart/>
+                    </div>
                     <div className="col-xs-12 col-sm-6">
                         <BookForm/>
                     </div>
-                    <div className="col-xs-12 col-sm-6">
-                        <Cart/>
-                    </div>
+                    
                     {bookList}
                 </div>
             </div>

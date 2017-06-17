@@ -9,12 +9,12 @@ export default function booksReducers (state = [], action){
             return [...state, ...action.payload];
         case "DELETE_BOOK":
             return state.filter(function(e, i){
-                return e.id != action.payload.id;
+                return e.id != action.payload._id;
             });
         case "UPDATE_BOOK":
             const cloneBooks = [];
             state.forEach(function(item){
-                if(item.id == action.payload.id){
+                if(item.id == action.payload._id){
                     item = action.payload;
                 }
                 cloneBooks.push(item);

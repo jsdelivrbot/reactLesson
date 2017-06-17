@@ -1,25 +1,37 @@
 export default function cartReducer(state = [], action){
+    // let cloneCart = [];
     switch(action.type){
         case 'ADD_CART':
             return [...state, action.payload];
-        case 'UPDATE_CART':
+        case 'UPDATE_CART':{
             let cloneCart = [];
+            cloneCart = [];
             state.forEach(function(item){
-                if(item.id == action.payload.id){
+                if(item._id == action.payload._id){
                     item = action.payload;
                 }
                 cloneCart.push(item);
             });
             return cloneCart;
-        case 'PLUS_QUANTITY_CART':
-            let Cart = [];
+        }
+        case 'PLUS_QUANTITY_CART': {
+            let cloneCart = [];
+            cloneCart = [];
             state.forEach(function(item){
-                if(item.id == action.payload){
+                if(item._id == action.payload){
                     item.quantity ++;
                 }
-                Cart.push(item);
+                cloneCart.push(item);
             });
-            return Cart;
+            return cloneCart;
+        }
+        case 'DELETE_ITEM_CART': {
+            let cloneCart = [];
+            cloneCart = state.filter(function(item){
+                return item._id != action.payload;
+            })
+            return cloneCart;
+        }
         default:
             return state;
     }

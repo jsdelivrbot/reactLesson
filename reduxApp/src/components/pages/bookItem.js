@@ -9,22 +9,22 @@ class BookItem extends React.Component {
     }
     BuyNowClick(){
         let book = {
-            id: this.props.id,
+            _id: this.props._id,
             title: this.props.title,
             description: this.props.description,
             price: this.props.price,
             quantity: 1
         };
         if(this.props.cart.length > 0) {
-            let _id = this.props.id;
+            let _id = this.props._id;
             let indexCart = this.props.cart.findIndex(function(item){
-                return item.id == _id;
+                return item._id == _id;
             })
             if(indexCart== -1){
                 this.props.addToCart(book);
             }
             else {
-                this.props.PlusQuantityCart(this.props.cart[indexCart].id);
+                this.props.PlusQuantityCart(this.props.cart[indexCart]._id);
             }
         }
         else {

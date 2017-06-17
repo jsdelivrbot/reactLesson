@@ -17,3 +17,10 @@ export function PlusQuantityCart(id){
         payload: id
     }
 }
+export function deleteItemCart(id){
+    console.log("id = ", id);
+    return {
+        type: "DELETE_ITEM_CART",
+        payload: id
+    }
+}
