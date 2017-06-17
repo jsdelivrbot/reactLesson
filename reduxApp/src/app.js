@@ -60,15 +60,15 @@ render(
 //Delete
 // store.dispatch(DeleteBook({id: 2 }));
 //update
-store.dispatch(UpdateBook(
-    {
-        id: 3,
-        title: 'book 3',
-        discription: "in this book we are going to learn how to use nodejs and reactjs to development an application",
-        price: 50
-    }
-));
+// store.dispatch(UpdateBook(
+//     {
+//         id: 3,
+//         title: 'book 3',
+//         discription: "in this book we are going to learn how to use nodejs and reactjs to development an application",
+//         price: 50
+//     }
+// ));
 //Cart actions
-store.dispatch(addToCart([{id: 2}]));
+// store.dispatch(addToCart([{id: 2}]));
 
 
