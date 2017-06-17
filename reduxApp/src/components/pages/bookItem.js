@@ -1,20 +1,36 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {addToCart} from '../../actions/cartActions';
+import {addToCart, PlusQuantityCart} from '../../actions/cartActions';
 
 class BookItem extends React.Component {
     constructor(props){
         super(props);
     }
     BuyNowClick(){
-        const book = {
+        let book = {
             id: this.props.id,
             title: this.props.title,
             description: this.props.description,
-            price: this.props.price
+            price: this.props.price,
+            quantity: 1
         };
-        this.props.addToCart(book);
+        if(this.props.cart.length > 0) {
+            let _id = this.props.id;
+            let indexCart = this.props.cart.findIndex(function(item){
+                return item.id == _id;
+            })
+            if(indexCart== -1){
+                this.props.addToCart(book);
+            }
+            else {
+                this.props.PlusQuantityCart(this.props.cart[indexCart].id);
+            }
+        }
+        else {
+            this.props.addToCart(book);
+        }
+        
     }
     render(){
         return(
@@ -39,7 +55,8 @@ function mapStateToProps(state){
 };
 function mapActionToProps(dispatch){
     return bindActionCreators({
-        addToCart: addToCart
+        addToCart: addToCart,
+        PlusQuantityCart: PlusQuantityCart
     }, dispatch);
 };
 
