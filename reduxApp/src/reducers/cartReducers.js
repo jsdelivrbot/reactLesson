@@ -5,7 +5,6 @@ export default function cartReducer(state = [], action){
             return [...state, action.payload];
         case 'UPDATE_CART':{
             let cloneCart = [];
-            cloneCart = [];
             state.forEach(function(item){
                 if(item._id == action.payload._id){
                     item = action.payload;
@@ -16,10 +15,19 @@ export default function cartReducer(state = [], action){
         }
         case 'PLUS_QUANTITY_CART': {
             let cloneCart = [];
-            cloneCart = [];
             state.forEach(function(item){
                 if(item._id == action.payload){
                     item.quantity ++;
+                }
+                cloneCart.push(item);
+            });
+            return cloneCart;
+        }
+        case 'MINUS_QUANTITY_CART': {
+            let cloneCart = [];
+            state.forEach(function(item){
+                if(item._id == action.payload){
+                    item.quantity --;
                 }
                 cloneCart.push(item);
             });

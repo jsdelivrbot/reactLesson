@@ -1,13 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {deleteItemCart} from '../../actions/cartActions';
+import {deleteItemCart, PlusQuantityCart, MinusQuantityCart} from '../../actions/cartActions';
 
 class Cart extends React.Component {
     constructor(props){
         super(props);
         // console.log(this.props.cart);
         this.onDeleteItemCart = this.onDeleteItemCart.bind(this);
+        this.onPlusClick = this.onPlusClick.bind(this);
     }
     render(){
         if(this.props.cart[0]){
@@ -26,6 +27,12 @@ class Cart extends React.Component {
         // console.log(id);
         this.props.deleteItemCart(id);
     }
+    onPlusClick(id){
+        this.props.PlusQuantityCart(id);
+    }
+    onMinusClick(id){
+        this.props.MinusQuantityCart(id);
+    }
     renderCart(){
         const cartItemsList = this.props.cart.map((item)=>{
             return (
@@ -42,8 +49,8 @@ class Cart extends React.Component {
                         </div>
                         <div className="col-xs-6 col-sm-4">
                             <div className="btn-group" style = {{minwidth: '300px'}}>
-                                <button className="btn btn-sm btn-default">-</button>
-                                <button className="btn btn-sm btn-default">+</button>
+                                <button onClick = { ()=>{ this.onMinusClick(item._id) } } className="btn btn-sm btn-default">-</button>
+                                <button onClick = {()=>this.onPlusClick(item._id)} className="btn btn-sm btn-default">+</button>
                                 <span></span>
                                 <button onClick = {()=>this.onDeleteItemCart(item._id)} className="btn btn-sm btn-danger">Delete</button>
                             </div>
@@ -73,7 +80,9 @@ function mapStateToProps(state){
 }
 function mapActionToProps(dispatch){
     return bindActionCreators({
-        deleteItemCart: deleteItemCart
+        deleteItemCart: deleteItemCart,
+        PlusQuantityCart: PlusQuantityCart,
+        MinusQuantityCart: MinusQuantityCart
     }, dispatch);
 }
 export default connect(mapStateToProps, mapActionToProps)(Cart);

@@ -17,6 +17,13 @@ export function PlusQuantityCart(id){
         payload: id
     }
 }
+export function MinusQuantityCart(id){
+    console.log("id = ", id);
+    return {
+        type: "MINUS_QUANTITY_CART",
+        payload: id
+    }
+}
 export function deleteItemCart(id){
     console.log("id = ", id);
     return {
