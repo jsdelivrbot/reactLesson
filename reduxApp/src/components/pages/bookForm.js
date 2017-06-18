@@ -3,41 +3,55 @@ import {connect } from "react-redux";
 import {bindActionCreators} from 'redux'
 // import {Panel} from 'react-bootstrap';
 import {DeleteBook, PostBook, UpdateBook} from '../../actions/bookActions';
+import {findDOMNode} from 'react-dom';
 
 class BookForm extends React.Component {
     constructor(props){
         super(props);
         this.onSubmitForm = this.onSubmitForm.bind(this);
         this.autoGenId = this.autoGenId.bind(this);
-        this.state = {
-            _id: 0,
-            title: "",
-            description: "",
-            price: 0
-        }
+        this.resetDefaultValue = this.resetDefaultValue.bind(this);
+        // this.state = {
+        //     _id: 0,
+        //     title: "",
+        //     description: "",
+        //     price: 0
+        // }
     };
     onSubmitForm(e){
         e.preventDefault();
 
-        this.autoGenId();
+        let newId = this.autoGenId();
+        const book = [{
+            _id: newId,
+            title: findDOMNode(this.refs.title).value,
+            description: findDOMNode(this.refs.description).value,
+            price: findDOMNode(this.refs.price).value
+        }]
+        this.props.PostBook(book);
+        this.resetDefaultValue();
 
-        this.props.PostBook([this.state]);
-        this.state = {
-             _id: 0,
-            title: "",
-            description: "",
-            price: 0
-        }
-        this.setState(this.state);
+        // this.state = {
+        //      _id: 0,
+        //     title: "",
+        //     description: "",
+        //     price: 0
+        // }
+        // this.setState(this.state);
+    }
+    resetDefaultValue(){
+        console.log(findDOMNode(this.refs.description));
+        findDOMNode(this.refs.description).value = "";
+        findDOMNode(this.refs.title).value = "";
+        findDOMNode(this.refs.price).value = "";
     }
     autoGenId(){
         let maxId = 0;
         this.props.books.forEach((item)=>{
             if(item._id > maxId) maxId = item._id;
-        })
+        });
         maxId ++;
-        this.state._id = maxId;
-        this.setState(this.state);
+        return maxId;        
     }
     render(){
         return(
@@ -47,19 +61,19 @@ class BookForm extends React.Component {
                         <div className="group-control">
                             <label>Tiêu Đề</label>
                             <input className = "form-control" type="text" placeholder = "Điền tiêu đề sách"
-                                value = {this.state.title} onChange = {e=>this.setState({title: e.target.value})}
+                               ref = "title"
                             />                        
                         </div>
                         <div className="group-control">
                             <label>Mô Tả</label>
                             <input className = "form-control" type="text" placeholder = "Điền mô tả cuốn sách"
-                                value = {this.state.description} onChange = {e=>this.setState({description: e.target.value})}
+                               ref = "description"
                             />                        
                         </div>
                         <div className="group-control">
                             <label>Giá bán</label>
                             <input className = "form-control" type="text" placeholder = "Điền giá bán"
-                                value = {this.state.price} onChange = {e=>this.setState({price: e.target.value})}
+                               ref = "price"
                             />                        
                         </div>
                         <br/>
