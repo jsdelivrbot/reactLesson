@@ -8,13 +8,14 @@ import BookItem from './bookItem';
 import BookForm from './bookForm';
 import Cart from './cart';
 
+
 class BooksList extends React.Component{
     constructor(props){
         super(props);
-        // this.renderItem= this.renderItem.bind(this);
         this.props.GetBooks();
+        
     };
-    
+
     render(){
         const bookList = this.props.books.map((book)=>{
             return (
@@ -28,13 +29,8 @@ class BooksList extends React.Component{
                 </div>
             );
         });
-
+        
         return (
-            // <Grid>
-            //     <Row style = {{marginTop: '15px'}}>
-            //         {bookList}
-            //     </Row>
-            // </Grid>
             <div className = "container">
                 <div id = "bookList" className="row"> 
                 <div className = "row">
@@ -42,8 +38,7 @@ class BooksList extends React.Component{
                     </div>
                     <div className="col-xs-12 col-sm-6">
                         <BookForm/>
-                    </div>
-                    
+                    </div>                    
                     {bookList}
                 </div>
             </div>

@@ -15,16 +15,16 @@ class BookItem extends React.Component {
             price: this.props.price,
             quantity: 1
         };
-        if(this.props.cart.length > 0) {
+        if(this.props.cart.cartItems.length > 0) {
             let _id = this.props._id;
-            let indexCart = this.props.cart.findIndex(function(item){
+            let indexCart = this.props.cart.cartItems.findIndex(function(item){
                 return item._id == _id;
             })
             if(indexCart== -1){
                 this.props.addToCart(book);
             }
             else {
-                this.props.PlusQuantityCart(this.props.cart[indexCart]._id);
+                this.props.PlusQuantityCart(this.props.cart.cartItems[indexCart]._id);
             }
         }
         else {
@@ -40,7 +40,7 @@ class BookItem extends React.Component {
                         <h4 className = "text-center" >{this.props.title}</h4>
                         <p>{this.props.description}</p>
                         <h4>$ {this.props.price}</h4>
-                        <button onClick = {this.BuyNowClick.bind(this)} className="btn btn-primary">Buy Now</button>
+                        <button onClick = {this.BuyNowClick.bind(this)} className="btn btn-primary">Mua Ngay</button>
                     </div>
                 </div>
             </div>

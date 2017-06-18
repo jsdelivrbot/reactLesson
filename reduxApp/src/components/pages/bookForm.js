@@ -10,19 +10,19 @@ class BookForm extends React.Component {
             <div className = "well">
                 <div className="panel panel-default">
                     <div className="group-control">
-                        <label>Title</label>
+                        <label>Tiêu Đề</label>
                         <input className = "form-control" type="text" placeholder = "Điền tiêu đề sách"
                             ref = "title"
                         />                        
                     </div>
                     <div className="group-control">
-                        <label>Description</label>
+                        <label>Mô Tả</label>
                         <input className = "form-control" type="text" placeholder = "Điền mô tả cuốn sách"
                             ref = "description"
                         />                        
                     </div>
                     <div className="group-control">
-                        <label>Price</label>
+                        <label>Giá bán</label>
                         <input className = "form-control" type="text" placeholder = "Điền giá bán"
                             ref = "price"
                         />                        
