@@ -24,7 +24,13 @@ class Menu extends React.Component {
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
                             <li><a href="/admin">Quản trị</a></li>
-                            <li><a href="/cart">Giỏ hàng <span className="badge">1</span></a></li>
+
+                            <li><a href="/cart">Giỏ hàng 
+                            
+                            {(this.props.cartItemsNumber)?(<span className="badge">{this.props.cartItemsNumber}</span>):("")}
+                            
+                            </a></li>
+
                             <li className="dropdown">
                                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Người Dùng <span className="caret"></span></a>
                                 <ul className="dropdown-menu">
