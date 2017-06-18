@@ -4,7 +4,7 @@ var path = require('path');
 
 app.use(express.static('public'));
 
-app.get('/', function(req, res, next){
+app.get('*', function(req, res, next){
     res.sendfile(path.resolve(__dirname, 'public', 'index.html'));
 })
 

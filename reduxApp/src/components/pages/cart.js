@@ -99,26 +99,26 @@ class Cart extends React.Component {
                 </div>
 
                 <Modal
-                isOpen={this.state.modalIsOpen}
-                onAfterOpen={this.afterOpenModal}
-                onRequestClose={this.closeModal}
-                style={customStyles}
-                contentLabel="Example Modal"
+                    isOpen={this.state.modalIsOpen}
+                    onAfterOpen={this.afterOpenModal}
+                    onRequestClose={this.closeModal}
+                    style={customStyles}
+                    contentLabel="Example Modal"
                 >
 
-                <div className="modal-header">
-                    <button onClick = {this.closeModal} type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 className="modal-title">Cám ơn bạn !</h4>
-                </div>
-                <div className="modal-body">
-                    <h5>Hóa đơn của bạn đã lưu thành công</h5>
-                    <p className = "text-primary">Tổng Tiền: {this.props.cart.totalAmount} $</p>
-                    <p>Chúng tôi sẽ gửi tới bạn email xác nhận thanh toán</p>
-                </div>
-                <div className="modal-footer">
-                        <button onClick = {this.closeModal} type="button" className="btn btn-default" >Đóng</button>
-                        <button type="button" className="btn btn-primary">Lưu Thay Đổi</button>
-                </div>
+                    <div className="modal-header">
+                        <button onClick = {this.closeModal} type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 className="modal-title">Cám ơn bạn !</h4>
+                    </div>
+                    <div className="modal-body">
+                        <h5>Hóa đơn của bạn đã lưu thành công</h5>
+                        <p className = "text-primary">Tổng Tiền: {this.props.cart.totalAmount} $</p>
+                        <p>Chúng tôi sẽ gửi tới bạn email xác nhận thanh toán</p>
+                    </div>
+                    <div className="modal-footer">
+                            <button onClick = {this.closeModal} type="button" className="btn btn-default" >Đóng</button>
+                            <button type="button" className="btn btn-primary">Lưu Thay Đổi</button>
+                    </div>
                     
                 </Modal>
 
