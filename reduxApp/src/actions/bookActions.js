@@ -33,7 +33,7 @@ export function GetBooks (){
         },
         {    
             _id: 6,
-            title: 'book 7',
+            title: 'book 6',
             discription: "in this book we are going to learn how to use nodejs and reactjs to development an application",
             price: 60
         },
