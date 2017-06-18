@@ -8,6 +8,8 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import BooksList from './components/pages/booksList';
+import Menu from './components/menu';
+import Footer from './components/footer';
 
 const store = createStore(reducers, /* preloadedState, */ compose(
     // applyMiddleware(ReduxPromise),
@@ -17,7 +19,12 @@ const store = createStore(reducers, /* preloadedState, */ compose(
 
 render(
     <Provider store = {store}>
-        <BooksList/>
+        <div>
+            <Menu/>
+            <BooksList/>
+            <Footer/>
+        </div>
+        
     </Provider>,
     document.getElementById('app')
 );
