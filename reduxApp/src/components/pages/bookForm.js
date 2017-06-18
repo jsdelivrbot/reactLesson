@@ -11,12 +11,7 @@ class BookForm extends React.Component {
         this.onSubmitForm = this.onSubmitForm.bind(this);
         this.autoGenId = this.autoGenId.bind(this);
         this.resetDefaultValue = this.resetDefaultValue.bind(this);
-        // this.state = {
-        //     _id: 0,
-        //     title: "",
-        //     description: "",
-        //     price: 0
-        // }
+        this.onDeleteBook = this.onDeleteBook.bind(this);
     };
     onSubmitForm(e){
         e.preventDefault();
@@ -30,17 +25,11 @@ class BookForm extends React.Component {
         }]
         this.props.PostBook(book);
         this.resetDefaultValue();
-
-        // this.state = {
-        //      _id: 0,
-        //     title: "",
-        //     description: "",
-        //     price: 0
-        // }
-        // this.setState(this.state);
+    }
+    onDeleteBook(){
+        this.props.DeleteBook(findDOMNode(this.refs.deleteBook).value);
     }
     resetDefaultValue(){
-        console.log(findDOMNode(this.refs.description));
         findDOMNode(this.refs.description).value = "";
         findDOMNode(this.refs.title).value = "";
         findDOMNode(this.refs.price).value = "";
@@ -54,9 +43,14 @@ class BookForm extends React.Component {
         return maxId;        
     }
     render(){
+        const renderIdList = this.props.books.map(function(item){
+            return (
+                <option key = {item._id} value = {item._id}>{item.title}</option>
+            );
+        })
         return(
             <div className = "well">
-                <div className="panel panel-default">
+                <div className="panel panel-default" style = {{padding: '10px'}}>
                     <form onSubmit = {this.onSubmitForm} action="">
                         <div className="group-control">
                             <label>Tiêu Đề</label>
@@ -79,6 +73,16 @@ class BookForm extends React.Component {
                         <br/>
                         <button className="btn btn-lg btn-primary">Lưu Thông Tin</button>
                     </form>
+                </div>
+                <div className="panel panel-default" style = {{padding: '10px'}}>
+                    <div className="form-group">
+                        <label htmlFor="sel1">Chọn tiêu đề sách:</label>
+                        <select className="form-control" ref = "deleteBook">
+                            <option>Chọn sản phẩm cần xóa</option>
+                            {renderIdList}
+                        </select>
+                        <button onClick = {this.onDeleteBook} className="btn btn-danger">Xóa</button>
+                    </div>
                 </div>                    
             </div>
         );
