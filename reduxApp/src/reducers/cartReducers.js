@@ -1,6 +1,7 @@
 export default function cartReducer(state = {
                                                 cartItems: [],
-                                                totalAmout: 0
+                                                totalAmout: 0,
+                                                totalQty: 0
                                             }, action){
     // let cloneCart = [];
     switch(action.type){
@@ -8,7 +9,8 @@ export default function cartReducer(state = {
             const cartItems = [...state.cartItems, action.payload];
             return {
                 cartItems: cartItems,
-                totalAmount: total(cartItems)
+                totalAmount: total(cartItems).totalAmount,
+                totalQty: total(cartItems).totalQty
             };
         case 'UPDATE_CART':{
             let cloneCart = [];
@@ -20,7 +22,8 @@ export default function cartReducer(state = {
             });
             return {
                 cartItems: cloneCart,
-                totalAmount: total(cloneCart)
+                totalAmount: total(cloneCart).totalAmount,
+                totalQty: total(cloneCart).totalQty
             };
         }
         case 'PLUS_QUANTITY_CART': {
@@ -33,7 +36,8 @@ export default function cartReducer(state = {
             });
             return {
                 cartItems: cloneCart,
-                totalAmount: total(cloneCart)
+                totalAmount: total(cloneCart).totalAmount,
+                totalQty: total(cloneCart).totalQty
             };
         }
         case 'MINUS_QUANTITY_CART': {
@@ -41,13 +45,14 @@ export default function cartReducer(state = {
             state.cartItems.forEach(function(item){
                 if(item._id == action.payload){
                     item.quantity --;
-                    if(item.quantity < 0) item.quantity = 0;
+                    if(item.quantity < 1) item.quantity = 1;
                 }
                 cloneCart.push(item);
             });
             return {
                 cartItems: cloneCart,
-                totalAmount: total(cloneCart)
+                totalAmount: total(cloneCart).totalAmount,
+                totalQty: total(cloneCart).totalQty
             };
         }
         case 'DELETE_ITEM_CART': {
@@ -57,7 +62,8 @@ export default function cartReducer(state = {
             })
             return {
                 cartItems: cloneCart,
-                totalAmount: total(cloneCart)
+                totalAmount: total(cloneCart).totalAmount,
+                totalQty: total(cloneCart).totalQty
             };
         }
         default:
@@ -70,6 +76,14 @@ export function  total(cartItems){
         return item.price * item.quantity;
     }).reduce(function(a, b){
         return a + b;
-    },0)
-    return totalAmount;
+    },0);
+    const totalQty = cartItems.map(function(item){
+        return item.quantity;
+    }).reduce(function(a, b){
+        return a + b;
+    },0);
+    return {
+        totalAmount:totalAmount,
+        totalQty: totalQty
+    };
 }
