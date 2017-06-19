@@ -7,12 +7,14 @@ import {GetBooks} from '../../actions/bookActions';
 import BookItem from './bookItem';
 import BookForm from './bookForm';
 import Cart from './cart';
+import {getCart} from '../../actions/cartActions';
 
 
 class BooksList extends React.Component{
     constructor(props){
         super(props);
         this.props.GetBooks();
+        this.props.getCart();
         
     };
 
@@ -53,7 +55,8 @@ function mapStateToProps(state){
 }
 function mapActionToProps(dispatch){
     return bindActionCreators({
-        GetBooks: GetBooks
+        GetBooks: GetBooks,
+        getCart: getCart
     }, dispatch);
 }
 export default connect(mapStateToProps, mapActionToProps)(BooksList) ;

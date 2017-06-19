@@ -10,6 +10,10 @@ var users = require('./routes/users');
 
 var app = express();
 
+import session from 'express-session';
+import connectMongo from 'connect-mongo';
+const MongoStore = connectMongo(session);
+const db = mongoose.connection;
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'jade');
@@ -21,13 +25,44 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+//===========>>>>>setup session<<<<<===================================
+app.use(session({
+  secret: 'son cat tuong secret',
+  saveUninitialized: false,
+  resave: false,
+  store: new MongoStore({mongooseConnection: db, ttl: 2*24*60*60})
+}))
 
+//===========>>>>> END setup session<<<<<================================
 
 //================================= API ================================
 import mongoose from 'mongoose';
 mongoose.connect('mongodb://localhost:27017/bookShop');
 import BookModel from'./models/book';
 mongoose.Promise = global.Promise;
+
+app.post('/api/cart', function(req, res){
+  console.log("req.session.cart", req.session.cart);
+  const cart = req.body.cart;
+  req.session.cart = cart;
+  req.session.save(function(err){
+    if(err){
+      throw err;
+    }
+    res.json({
+      message: "success",
+      cart: req.session.cart
+    })
+  })
+});
+
+app.get('/api/cart', function(req, res){
+ if(typeof(req.session.cart) !== 'undefined') {
+   res.json({
+     cart: req.session.cart
+    });
+ }
+});
 
 app.post('/api/books', async function(req, res){
   console.log('go here');
@@ -70,7 +105,7 @@ app.get('/api/books', async function(req, res){
 
 app.delete('/api/books/:_id', async function(req, res){
   try {
-    console.log("req.params._id ", req.params._id)
+    // console.log("req.params._id ", req.params._id)
     var query = {
       _id: req.params._id
     }

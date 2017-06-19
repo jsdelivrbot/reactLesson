@@ -1,7 +1,41 @@
+import axios from 'axios';
+
 export function addToCart(book){
-    return {
-        type: "ADD_CART",
-        payload: book
+    return function(dispatch){
+        axios.post('/api/cart', {cart: book})
+        .then(function(res){
+            dispatch({
+                type: 'ADD_CART',
+                payload: res.data.cart
+            })
+        })
+        .catch(function(err){
+            dispatch({
+                type: 'ADD_CART_ERR',
+                payload: err
+            })
+        });
+    }
+    // return {
+    //     type: "ADD_CART",
+    //     payload: book
+    // }
+}
+export function getCart(){
+    return function(dispatch){
+        axios.get('/api/cart')
+        .then(function(res){
+            dispatch({
+                type: "GET_CART",
+                payload: res.data.cart
+            })
+        })
+        .catch(function(err){
+            dispatch({
+                type: 'GET_CART_ERR',
+                payload: err
+            })
+        });
     }
 }
 export function updateCart(book){
@@ -11,7 +45,7 @@ export function updateCart(book){
     }
 }
 export function PlusQuantityCart(id){
-    console.log("id = ", id);
+    // console.log("id = ", id);
     return {
         type: "PLUS_QUANTITY_CART",
         payload: id

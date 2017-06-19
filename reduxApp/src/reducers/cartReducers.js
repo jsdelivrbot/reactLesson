@@ -5,13 +5,23 @@ export default function cartReducer(state = {
                                             }, action){
     // let cloneCart = [];
     switch(action.type){
-        case 'ADD_CART':
+        case 'ADD_CART':{
             const cartItems = [...state.cartItems, action.payload];
             return {
                 cartItems: cartItems,
                 totalAmount: total(cartItems).totalAmount,
                 totalQty: total(cartItems).totalQty
-            };
+            };}
+        case 'GET_CART':{
+            const cartItems = [...state.cartItems, action.payload];
+            console.log("cartItems ", cartItems);
+            console.log("action.payload ", action.payload);
+
+            return {
+                cartItems: cartItems,
+                totalAmount: total(cartItems).totalAmount,
+                totalQty: total(cartItems).totalQty
+            };}
         case 'UPDATE_CART':{
             let cloneCart = [];
             state.cartItems.forEach(function(item){

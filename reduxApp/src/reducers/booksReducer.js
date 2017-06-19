@@ -1,9 +1,7 @@
 "use strict"
-//Book Reducer
 export default function booksReducers (state = [], action){
     switch(action.type){
         case "Get_BOOKS":
-            // console.log(action.payload);
             return [...state, ...action.payload];
         case "POST_BOOK":
             return [...state, ...action.payload];
