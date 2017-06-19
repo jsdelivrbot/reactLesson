@@ -23,7 +23,7 @@ class BooksList extends React.Component{
                     <BookItem
                         _id = {book._id}
                         title = {book.title}
-                        description = {book.discription}
+                        description = {book.description}
                         price = {book.price}
                     />
                 </div>
