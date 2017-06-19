@@ -16,9 +16,9 @@ class BookForm extends React.Component {
     onSubmitForm(e){
         e.preventDefault();
 
-        let newId = this.autoGenId();
+        // let newId = this.autoGenId();
         const book = [{
-            _id: newId,
+            // _id: newId,
             title: findDOMNode(this.refs.title).value,
             description: findDOMNode(this.refs.description).value,
             price: findDOMNode(this.refs.price).value

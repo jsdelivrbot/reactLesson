@@ -14,10 +14,11 @@ import BooksList from './components/pages/booksList';
 import Cart from './components/pages/cart';
 import BookForm from './components/pages/bookForm';
 import Main from './components/main';
+import ReduxThunk from 'redux-thunk'
 
 const store = createStore(reducers, /* preloadedState, */ compose(
     // applyMiddleware(ReduxPromise),
-    applyMiddleware(reduxLogger()),
+    applyMiddleware(ReduxThunk,reduxLogger()),
     window.devToolsExtension? window.devToolsExtension() : f=> f
   ));
 const Routes = (
