@@ -97,11 +97,14 @@ class BookForm extends React.Component {
                     <div className="col-xs-6">
                         <div className="panel panel-default" style = {{padding: '10px'}}>
                             <form onSubmit = {this.onSubmitForm} action="">
-                                <div className="group-control">
+                                <div className="form-group has-error">
                                     <label>Tiêu Đề</label>
                                     <input className = "form-control" type="text" placeholder = "Điền tiêu đề sách"
                                     ref = "title"
-                                    />                        
+                                    aria-describedby="inputError2Status"
+                                    />
+                                    <span className="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    <span id="inputError2Status" className="sr-only">(error)</span>                    
                                 </div>
                                 <div className="group-control">
                                     <label>Mô Tả</label>
