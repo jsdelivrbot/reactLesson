@@ -39,12 +39,19 @@ app.use(session({
 import mongoose from 'mongoose';
 mongoose.connect('mongodb://localhost:27017/bookShop');
 import BookModel from'./models/book';
+import caculateCart from './shared/caculateCart';
+
 mongoose.Promise = global.Promise;
 
 app.post('/api/cart', function(req, res){
-  console.log("req.session.cart", req.session.cart);
-  const cart = req.body.cart;
+  console.log("go to post api/cart req.session.cart = ", req.session.cart);
+  let cart = req.body.cart;
+  console.log("cart = ", cart);
+  cart.totalAmount = caculateCart(cart.cartItems).totalAmount;
+  cart.totalQty = caculateCart(cart.cartItems).totalQty;
+  console.log("update cart = ", cart);
   req.session.cart = cart;
+  console.log("updated req.session.cart = ", req.session.cart);
   req.session.save(function(err){
     if(err){
       throw err;
@@ -57,6 +64,7 @@ app.post('/api/cart', function(req, res){
 });
 
 app.get('/api/cart', function(req, res){
+  console.log(req.session.cart);
  if(typeof(req.session.cart) !== 'undefined') {
    res.json({
      cart: req.session.cart

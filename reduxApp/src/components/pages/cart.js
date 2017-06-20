@@ -3,11 +3,12 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {deleteItemCart, PlusQuantityCart, MinusQuantityCart} from '../../actions/cartActions';
 import Modal from 'react-modal';
+import {getCart} from '../../actions/cartActions';
 
 class Cart extends React.Component {
     constructor(props){
         super(props);
-        // console.log(this.props.cart.cartItems);
+        this.props.getCart();
         this.onDeleteItemCart = this.onDeleteItemCart.bind(this);
         this.onPlusClick = this.onPlusClick.bind(this);
 
@@ -31,14 +32,13 @@ class Cart extends React.Component {
         );
     };
     onDeleteItemCart(id){
-        // console.log(id);
-        this.props.deleteItemCart(id);
+        this.props.deleteItemCart(id, this.props.cart);
     }
     onPlusClick(id){
-        this.props.PlusQuantityCart(id);
+        this.props.PlusQuantityCart(id, this.props.cart);
     }
     onMinusClick(id){
-        this.props.MinusQuantityCart(id);
+        this.props.MinusQuantityCart(id, this.props.cart);
     }
     OnPurchaseClick(){
         this.setState({modalIsOpen: true});
@@ -51,8 +51,7 @@ class Cart extends React.Component {
     renderCart(){
         const cartItemsList = this.props.cart.cartItems.map((item)=>{
             return (
-                <div key = {item._id} className = "row">
-                   
+                <div key = {`cart_${item._id}`} className = "row">
                         <div className="col-xs-12 col-sm-4">
                             <p className = "lead">{item.title} <span></span></p>                        
                         </div>
@@ -137,7 +136,8 @@ function mapActionToProps(dispatch){
     return bindActionCreators({
         deleteItemCart: deleteItemCart,
         PlusQuantityCart: PlusQuantityCart,
-        MinusQuantityCart: MinusQuantityCart
+        MinusQuantityCart: MinusQuantityCart,
+        getCart: getCart
     }, dispatch);
 }
 export default connect(mapStateToProps, mapActionToProps)(Cart);

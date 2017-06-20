@@ -21,14 +21,14 @@ class BookItem extends React.Component {
                 return item._id == _id;
             })
             if(indexCart== -1){
-                this.props.addToCart(book);
+                this.props.addToCart(this.props.cart, book);
             }
             else {
-                this.props.PlusQuantityCart(this.props.cart.cartItems[indexCart]._id);
+                this.props.PlusQuantityCart(this.props.cart.cartItems[indexCart]._id, this.props.cart);
             }
         }
         else {
-            this.props.addToCart(book);
+            this.props.addToCart(this.props.cart, book);
         }
         
     }
