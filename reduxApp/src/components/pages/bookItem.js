@@ -38,8 +38,10 @@ class BookItem extends React.Component {
                 <div className="row">
                     <div className="col-xs-12">
                         <h4 className = "text-center" >{this.props.title}</h4>
-                        <p>{this.props.description}</p>
+                        
+                        { (this.props.image)?(<img style = {{maxWidth: '100%', height:'170px'}} src = {'/images/' +this.props.image}/>) : ("")  }
                         <h4>$ {this.props.price}</h4>
+                        <p>{this.props.description}</p>
                         <button onClick = {this.BuyNowClick.bind(this)} className="btn btn-primary">Mua Ngay</button>
                     </div>
                 </div>

@@ -20,6 +20,7 @@ const db = mongoose.connection;
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(express.static('public'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -40,18 +41,32 @@ import mongoose from 'mongoose';
 mongoose.connect('mongodb://localhost:27017/bookShop');
 import BookModel from'./models/book';
 import caculateCart from './shared/caculateCart';
-
+import fs from 'fs';
 mongoose.Promise = global.Promise;
 
+app.get('/api/images', function(req, res){
+  const imageFolder = __dirname + '/public/images';
+  fs.readdir(imageFolder, function(err, files){
+    if(err){
+      return console.log(err);
+    }
+    let filesArr = [];
+    let count = 1;
+    files.forEach(function(file){
+      filesArr.push({
+        name:file
+      });
+      count++;
+    });
+    res.json({images: filesArr})
+  })
+})
+
 app.post('/api/cart', function(req, res){
-  console.log("go to post api/cart req.session.cart = ", req.session.cart);
   let cart = req.body.cart;
-  console.log("cart = ", cart);
   cart.totalAmount = caculateCart(cart.cartItems).totalAmount;
   cart.totalQty = caculateCart(cart.cartItems).totalQty;
-  console.log("update cart = ", cart);
   req.session.cart = cart;
-  console.log("updated req.session.cart = ", req.session.cart);
   req.session.save(function(err){
     if(err){
       throw err;
@@ -63,22 +78,23 @@ app.post('/api/cart', function(req, res){
   })
 });
 
-app.get('/api/cart', function(req, res){
-  console.log(req.session.cart);
- if(typeof(req.session.cart) !== 'undefined') {
+app.get('/api/cart', function(req, res, next){
+ if(req.session.cart) {
    res.json({
      cart: req.session.cart
     });
  }
+ else {
+  
+ next();
+ }
 });
 
 app.post('/api/books', async function(req, res){
-  console.log('go here');
   try {
     if(req.body.books){
       BookModel.create(req.body.books,(err, books)=>{
         if(err){
-          console.log(err);
           throw err;
         }
         else {

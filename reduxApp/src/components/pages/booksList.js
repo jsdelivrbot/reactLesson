@@ -25,6 +25,7 @@ class BooksList extends React.Component{
                         title = {book.title}
                         description = {book.description}
                         price = {book.price}
+                        image = { (book.image)?(book.image) : ("")   }
                     />
                 </div>
             );
@@ -32,13 +33,7 @@ class BooksList extends React.Component{
         
         return (
             <div className = "container">
-                <div id = "bookList" className="row"> 
-                <div className = "row">
-                        <Cart/>
-                    </div>
-                    <div className="col-xs-12 col-sm-6">
-                        <BookForm/>
-                    </div>                    
+                <div id = "bookList" className="row">                   
                     {bookList}
                 </div>
             </div>
