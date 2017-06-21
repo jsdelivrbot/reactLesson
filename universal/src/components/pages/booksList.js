@@ -13,10 +13,12 @@ import {getCart} from '../../actions/cartActions';
 class BooksList extends React.Component{
     constructor(props){
         super(props);
-        this.props.GetBooks();        
+        this.props.GetBooks();
+        this.props.getCart();      
     };
 
     render(){
+        console.log('this.props = ', this.props);
         const bookList = this.props.books.map((book)=>{
             return (
                 <div id="book-item" className = "col-xs-12 col-sm-6 col-md-4"  key = { `book_${book._id}`}>
