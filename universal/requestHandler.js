@@ -45,7 +45,14 @@ export function RequestHandler (req, res){
                 res.status(200).render('index', { reactComponent, initialState })
             }
             else {
-                res.status(404).send('Không tìm thấy trang bạn yêu cầu!!');
+                const reactComponent = renderToString(
+                    <Provider store = {store}>
+                        
+                    </Provider>
+                );
+                res.status(200).render('index', { reactComponent, initialState })
+
+                // res.status(404).send('Không tìm thấy trang bạn yêu cầu!!');
                 
                 // res.status(200).render('index')
             }
