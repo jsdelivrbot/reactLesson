@@ -11,7 +11,7 @@ export default function cartReducer(state = {
                 totalQty: action.payload.totalQty
             };}
         case 'GET_CART':{
-            const cartItems = [...state.cartItems, ...action.payload.cartItems];
+            const cartItems = [...action.payload.cartItems];
 
             return {
                 cartItems: action.payload.cartItems,

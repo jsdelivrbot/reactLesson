@@ -2,7 +2,7 @@
 export default function booksReducers (state = [], action){
     switch(action.type){
         case "Get_BOOKS":
-            return [...state, ...action.payload];
+            return [...action.payload];
         case "POST_BOOK":
             return [...state, ...action.payload];
         case "DELETE_BOOK":
