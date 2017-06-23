@@ -1,6 +1,13 @@
+ import axios from "axios";
+
 export const fetchMeetup = ()=>{
-    fetch('http://localhost:3000/api/meetups')
-    .then(res=>{
-        res.json()
-    })
+     return axios.get('http://192.168.1.12:3000/api/meetups')
+    // fetch('http://192.168.1.12:3000/api/meetups')
+    // .then(res => res.json())
+    // .catch(err=>{        
+    //     console.log("====================================================");
+    //     console.log("Da co loi:", err);
+    //     console.log("====================================================");
+    // });
+    
 }
