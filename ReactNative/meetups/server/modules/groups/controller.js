@@ -94,7 +94,9 @@ export const createGroupMeetup = async (req, res) => {
   }
   // const group = new groupModel({ name, description });
   try {
-    groupModel.addMeetup(groupId, { title, description });
+    const [meetup, group] = await groupModel.addMeetup(groupId, { title, description });
+    console.log("meetup", meetup);
+    console.log("group: ", group);
   } catch (err) {
     return res.status(400).json({
       error: true,
