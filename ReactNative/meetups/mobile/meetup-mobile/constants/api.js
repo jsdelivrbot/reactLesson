@@ -1,17 +1,24 @@
  import axios from "axios";
-const fakeGroupId = "594dc69a479d581e34312612";
-axios.defaults.baseURL = "http://192.168.43.242:3000/api";
+const fakeGroupId = "594e3a056343531ef46db3b7";
+axios.defaults.baseURL = "http://192.168.43.246:3000/api";
 
 class MeetupApi {
     constructor(){
         this.groupId = fakeGroupId;
         this.path = `/groups/${this.groupId}/getGroupMeetups`;
+    }
+    async fetchGroupMeetups(){
+          console.log("go here!!!!!!!!!!!!")
+      try {
+         const { data } = await axios.get(this.path);
 
-        async function fetchGroupMeetups(){
-            const { data } = await axios.get(this.path);
-
-            return data.group.meetups;
-        }
+        return data.group;
+      }
+      catch(err){
+        console.log("==============Da Co Loi==================");
+        console.log(err)
+        console.log("================================");
+      }
     }
 }
 
@@ -19,13 +26,13 @@ export {
     MeetupApi
 }
 export const fetchMeetup = ()=>{
-     return axios.get('http://192.168.43.242:3000/api/meetups')
+     return axios.get(`${axios.defaults.baseURL}/meetups`)
     // fetch('http://192.168.1.12:3000/api/meetups')
     // .then(res => res.json())
-    // .catch(err=>{        
+    // .catch(err=>{
     //     console.log("====================================================");
     //     console.log("Da co loi:", err);
     //     console.log("====================================================");
     // });
-    
+
 }

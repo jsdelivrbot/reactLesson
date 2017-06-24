@@ -94,14 +94,14 @@ export const createGroupMeetup = async (req, res) => {
   }
   // const group = new groupModel({ name, description });
   try {
-    const {meetup, group} = await groupModel.addMeetup(groupId, { title, description });
+    const { meetup, group } = await groupModel.addMeetup(groupId, { title, description });
     // console.log("meetup", meetup);
     // console.log("group: ", group);
     res.status(200).json({
       error: false,
       meetup,
-      group
-    })
+      group,
+    });
   } catch (err) {
     return res.status(400).json({
       error: true,
@@ -110,36 +110,35 @@ export const createGroupMeetup = async (req, res) => {
   }
 };
 
-export const getGroupMeetups = async (req, res)=>{
+export const getGroupMeetups = async (req, res) => {
   const { groupId } = req.params;
 
-  if(!groupId){
+  if (!groupId) {
     return res.status(400).json({
       error: true,
-      message: "bạn cần cung cấp id của nhóm",
+      message: 'bạn cần cung cấp id của nhóm',
     });
   }
 
   const group = await groupModel.findById(groupId)
-                                .populate("meetups");
+    .populate('meetups');
 
-  if(!group){
+  if (!group) {
     res.status(400).json({
       error: true,
-      message: "Không tìm thấy nhóm bạn yêu cầu",
-    })
+      message: 'Không tìm thấy nhóm bạn yêu cầu',
+    });
   }
 
   try {
     res.status(200).json({
       error: true,
-      group: group,
-    })
-  }
-  catch(err){
+      group,
+    });
+  } catch (err) {
     res.status(400).json({
       error: true,
-      message: "Đẫ có lỗi xuất hiện" + err,
-    })
+      message: 'Đẫ có lỗi xuất hiện' + err,
+    });
   }
-}
+};

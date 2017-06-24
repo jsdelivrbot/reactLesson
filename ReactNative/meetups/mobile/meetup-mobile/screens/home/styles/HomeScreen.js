@@ -4,10 +4,19 @@ import {StyleSheet} from 'react-native';
 
 const styles = EStyleSheet.create({
     root: {
-        // display: 'flex',
-        // flex: 1,
+        flex: 1,
         justifyContent: 'center',
         backgroundColor: '$blackBlueColor',
+    },
+    topContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      // backgroundColor: 'red',
+      alignItems: 'center',
+    },
+    bottomContainer: {
+      flex: 0.8,
+      // backgroundColor: 'blue',
     }
 });
 
