@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
+import color from '../../constants/colors';
+
 class NotificationScreen extends Component {
     state = {  }
     static navigationOptions  = {
-    tabBarIcon: ({tintColor}) =>    
+    headerTitleStyle:{},
+    headerStyle: {
+      backgroundColor: color.redColor,
+    },
+    tabBarIcon: ({tintColor}) =>
       <Ionicons name="ios-notifications" size={25} color={ tintColor } />
     ,
   };

@@ -15,13 +15,19 @@ export default TabNavigator({
     },
     Profile: {
         screen: ProfileScreen
-    }, 
+    },
 }, {
-        swipeEnbabled: true,        
+        swipeEnbabled: true,
         tabBarPosition: 'bottom',
         scrollEnabled: true,
         animationEnabled: true,
-        tabBarOptions: {            
+        indicatorStyle: {
+          backgroundColor: color.redColor
+        },
+        style: {
+          backgroundColor: color.whiteColor,
+        },
+        tabBarOptions: {
             showIcon: true,
             showLabel: false,
             activeTintColor: color.redColor,
