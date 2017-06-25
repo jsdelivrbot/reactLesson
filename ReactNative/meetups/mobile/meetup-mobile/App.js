@@ -4,11 +4,12 @@ import {fetchMeetup} from './constants/api.js';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Colors from './constants/colors';
 import { HomeScreen } from './screens';
+import Root from './Root';
 EStyleSheet.build(Colors);
 export default class App extends React.Component {
   render(){
     return(
-        <HomeScreen/>
+        <Root/>
     )
   }
 }

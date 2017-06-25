@@ -2,9 +2,11 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import colors from '../../../constants/colors';
 import {StyleSheet} from 'react-native';
 
+
 const styles = EStyleSheet.create({
     root: {
         flex: 1,
+        // height:300,
         justifyContent: 'center',
         backgroundColor: '$blackBlueColor',
     },

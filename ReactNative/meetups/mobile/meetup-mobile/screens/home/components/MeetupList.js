@@ -4,7 +4,6 @@ import { View, Text, ScrollView } from 'react-native';
 import styles from './styles/MeetupList';
 
 const MeetupList = ({ group })=>{
-  console.log("group = ", group);
   if(group.meetups){
     return(
       <View style = {styles.root} >

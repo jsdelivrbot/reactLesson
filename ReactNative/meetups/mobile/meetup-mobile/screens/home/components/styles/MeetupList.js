@@ -24,7 +24,7 @@ const styles = EStyleSheet.create({
       width: 175,
       padding: 2,
       // marginHorizontal: '1.5%',
-      backgroundColor: '#f73859',
+      backgroundColor: '$redColor',
       marginLeft: 5,
     },
     meetupCardTopContainer: {
