@@ -1,6 +1,7 @@
  import axios from "axios";
-const fakeGroupId = "594e3a056343531ef46db3b7";
-axios.defaults.baseURL = "http://192.168.1.12:3000/api";
+export const fakeGroupId = "594dc69a479d581e34312612";
+export const baseURL = "http://192.168.42.87:3000/api";
+axios.defaults.baseURL = baseURL;
 
 class MeetupApi {
     constructor(){
@@ -10,7 +11,7 @@ class MeetupApi {
     async fetchGroupMeetups(){
       try {
          const { data } = await axios.get(this.path);
-
+         console.log("data = ", data);
         return data.group;
       }
       catch(err){
