@@ -6,26 +6,26 @@ const INITIAL_STATE = {
     isFetched: false,
     error: {
       on: false,
-      message: null
-    }
-  }
+      message: null,
+    },
+  },
 };
 
-export default (state = INITIAL_STATE, action) =>{
-  switch(action.type){
+export default (state = INITIAL_STATE, action) => {
+  switch (action.type) {
     case `${FETCH_MEETUPS}_PENDING`:
       return INITIAL_STATE;
     case `${FETCH_MEETUPS}_FULLFILLED`:
-      return {...state,
-            group: {
-            data: action.payload,
-            isFetched: true,
-            error: {
+      return { ...state,
+        group: {
+          data: action.payload,
+          isFetched: true,
+          error: {
             on: false,
-            message: null
-          }
-        }
-      }
+            message: null,
+          },
+        },
+      };
     case `${FETCH_MEETUPS}_REJECTED`:
       return {
         group: {
@@ -33,11 +33,11 @@ export default (state = INITIAL_STATE, action) =>{
           isFetched: true,
           error: {
             on: true,
-            message: 'Lỗi load dữ liệu'
-          }
-        }
-      }
+            message: 'Lỗi load dữ liệu',
+          },
+        },
+      };
     default:
-    return state;
+      return state;
   }
-}
+};
