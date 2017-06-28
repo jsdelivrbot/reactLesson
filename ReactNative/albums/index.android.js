@@ -12,10 +12,13 @@ import {
   View
 } from 'react-native';
 
+import Header from './src/components/header';
+
 export default class albums extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Header />
         <Text style={styles.welcome}>
           Chào mừng bạn đến với thể giới android
         </Text>
