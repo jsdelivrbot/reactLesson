@@ -16,12 +16,14 @@ import Header from './src/components/header';
 
 export default class albums extends Component {
   render() {
+    
     return (
-      <View style={styles.container}>
-        <Header />
+      <View>
+        <Header headerText = {"Albums"}/>
       </View>
     );
   }
 }
+
 
 AppRegistry.registerComponent('albums', () => albums);

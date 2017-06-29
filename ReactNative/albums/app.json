@@ -1,4 +1,10 @@
 {
   "name": "albums",
-  "displayName": "albums"
+  "displayName": "albums",
+  "expo": {
+    "sdkVersion": "17.0.0",
+    "packagerOpts": {
+      "assetExts": ["ttf"]
+    }
+  }
 }

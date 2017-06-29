@@ -1,5 +1,5 @@
 
-var compression = require('compression');
+// var compression = require('compression');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -11,7 +11,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 import {GetBooks, RequestHandler} from'./requestHandler';
 var app = express();
-app.use(compression());
+// app.use(compression());
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
 const MongoStore = connectMongo(session);
