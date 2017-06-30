@@ -1,37 +1,60 @@
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Linking } from 'react-native';
 import Card from './card';
 import CardSection from './cardSection';
+import Button from './Button';
 
-const AlbumDetail = (props) => {
+class AlbumDetail extends Component {
 
-    const { title, artist, thumbnail_image, image } = props.album;
-    const { 
-        headerContentStyle, 
-        thumbnailStyle, 
-        thumbnailContainerStyle,
-        headerTextStyle,
-        imageStyle
-         } = styles;
+    constructor(props) {
+        super(props);
+        this.onSubmitPress = this.onSubmitPress.bind(this);
+    }
+
+    onSubmitPress(url) {
+        Linking.openURL(url);
+    }
+
+    render() {
+        const { title, artist, thumbnail_image, image, url } = this.props.album;
+        const { 
+            headerContentStyle, 
+            thumbnailStyle, 
+            thumbnailContainerStyle,
+            headerTextStyle,
+            imageStyle
+            } = styles;
+
         return (
             <Card>
                 <CardSection>
-                    <View style = { thumbnailContainerStyle }>
-                        <Image style = {thumbnailStyle} source = {{ uri: thumbnail_image }} />
+                    <View style={thumbnailContainerStyle}>
+                        <Image style={thumbnailStyle} source={{ uri: thumbnail_image }} />
                     </View>
-                    <View style = { headerContentStyle }>
-                        <Text style = { headerTextStyle }>{ title }</Text>
+                    <View style={headerContentStyle}>
+                        <Text style={headerTextStyle}>{ title }</Text>
                         <Text>{ artist }</Text>
                     </View>
                 </CardSection>
                 <CardSection>
                     <Image 
-                    style = { imageStyle }
-                    source = {{ uri: image }} />
+                        style={imageStyle}
+                        source={{ uri: image }}
+                    />
+                </CardSection>
+                <CardSection>
+                    <Button 
+                    onPress={
+                        () => this.onSubmitPress(url)
+                    }
+                    >
+                        <Text>Buy Now</Text>
+                    </Button>
                 </CardSection>
             </Card>
         );
-};
+    }
+}
 
 const styles = {
     headerContentStyle: {
@@ -56,6 +79,6 @@ const styles = {
         flex: 1,
         width: null
     }
-}
+};
 
 export default AlbumDetail;
