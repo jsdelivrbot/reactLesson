@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from './components/commons/header';
+import {Header} from './components/commons';
 import {View, Text} from 'react-native';
 
 class Main extends Component {
