@@ -14,7 +14,7 @@ import {
 
 import Header from './src/components/header';
 import AlbumList from './src/components/albumList';
-export default class albums extends Component {
+export default class authentication extends Component {
   render() {
     
     return (
@@ -27,4 +27,4 @@ export default class albums extends Component {
 }
 
 
-AppRegistry.registerComponent('albums', () => albums);
+AppRegistry.registerComponent('authentication', () => authentication);
