@@ -10,7 +10,7 @@
    "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "dependencies": {
     "react": "^16.0.0-alpha.6",
-    "react-native": "^0.44.3",    
+    "react-native": "^0.44.0",    
     "expo": "^17.0.0"
   },
   "devDependencies": {

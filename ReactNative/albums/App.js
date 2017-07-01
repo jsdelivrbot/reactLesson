@@ -11,16 +11,14 @@ import {
   Text,
   View
 } from 'react-native';
+import Main from './src/main';
 
-import Header from './src/components/header';
-import AlbumList from './src/components/albumList';
 export default class authentication extends Component {
   render() {
     
     return (
       <View style = {{ flex:1 }}>
-        <Header headerText = {"Albums"}/>
-        <AlbumList />
+        <Main />
       </View>
     );
   }
