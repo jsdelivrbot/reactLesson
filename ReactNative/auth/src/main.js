@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import {Header} from './components/commons';
+import {Header, Button} from './components/commons';
 import {View} from 'react-native';
 import firebase from 'firebase';
 import LoginForm from './components/loginForm';
 
 class Main extends Component {
+    state = {
+        loggedIn: false
+    };
     componentWillMount() {
         firebase.initializeApp({
             apiKey: 'AIzaSyAUaYNtSm2JrP-QNWt8ftG8Pmm5lbM5qpc',
@@ -14,12 +17,35 @@ class Main extends Component {
             storageBucket: 'authentication-c97b0.appspot.com',
             messagingSenderId: '973039468572'
         });
+
+        firebase.auth().onAuthStateChanged((user)=>{
+            if(user){
+                this.setState({ loggedIn: true })
+            }
+            else {
+                this.setState({ loggedIn: false })
+            }
+        });
     }
+
+    renderContent() {
+        if(this.state.loggedIn) {
+            return (
+                <Button >
+                    log out
+                </Button>
+            );
+        }
+        return (
+            <LoginForm />
+        );
+    }
+
     render() {
         return (
             <View>
                 <Header headerText = {'Authentication'} />
-                <LoginForm />
+                {this.renderContent()}
             </View>
         );
     }

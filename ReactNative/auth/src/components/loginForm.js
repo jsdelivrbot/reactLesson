@@ -17,33 +17,27 @@ class LoginForm extends Component {
             loadding: true
         })
         firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(()=>{
-                    this.setState({
-                        email: "",
-                        password: "",
-                        error: "",
-                        loadding: false
-                    })
-            })
+            .then(this.onLoginSuccess.bind(this))
             .catch(()=>{
                 firebase.auth().createUserWithEmailAndPassword(email, password)
-                .then(()=>{
-                    this.setState({
-                        email: "",
-                        password: "",
-                        error: "",
-                        loadding: false
-                    })
-                })
-                    .catch((error)=>{
-                        this.setState({
-                            error: `Đã có lỗi ${error}`,
-                            loadding: false
-                        });
-                    });
+                .then(this.onLoginSuccess.bind(this))
+                    .catch(this.onLoginFail.bind(this));
             });
     }
-
+    onLoginSuccess() {
+        this.setState({
+                    email: "",
+                    password: "",
+                    error: "",
+                    loadding: false
+                })
+    }
+    onLoginFail() {
+        this.setState({
+            error: `Đã có lỗi đăng nhập`,
+            loadding: false
+        })
+    }
     renderLoginButton() {
         if(this.state.loadding === true) {
             return <Spinner size = 'small' />

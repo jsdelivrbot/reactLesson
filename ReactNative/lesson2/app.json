@@ -1,0 +1,10 @@
+{
+  "name": "lesson",
+  "displayName": "lesson",
+  "expo": {
+    "sdkVersion": "17.0.0",
+    "packagerOpts": {
+      "assetExts": ["ttf"]
+    }
+  }
+}

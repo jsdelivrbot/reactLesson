@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import Main from './src/main';
 
-export default class authentication extends Component {
+export default class Authentication extends Component {
   render() {
     
     return (
@@ -25,4 +25,4 @@ export default class authentication extends Component {
 }
 
 
-AppRegistry.registerComponent('authentication', () => authentication);
+// AppRegistry.registerComponent('Authentication', () => Authentication);
