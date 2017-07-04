@@ -1,0 +1,10 @@
+{
+  "name": "TechStack",
+  "displayName": "tech-stack",
+  "expo": {
+    "sdkVersion": "17.0.0",
+    "packagerOpts": {
+      "assetExts": ["ttf"]
+    }
+  }
+}
