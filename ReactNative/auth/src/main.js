@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Header, Button} from './components/commons';
+import {Header, Button, CardSection} from './components/commons';
 import {View} from 'react-native';
 import firebase from 'firebase';
 import LoginForm from './components/loginForm';
@@ -28,12 +28,18 @@ class Main extends Component {
         });
     }
 
+    onLogOutPress() {
+        firebase.auth().signOut();
+    }
+
     renderContent() {
         if(this.state.loggedIn) {
             return (
-                <Button >
-                    log out
-                </Button>
+                <CardSection>
+                    <Button onPress = {this.onLogOutPress} >
+                        log out
+                    </Button>
+                </CardSection>
             );
         }
         return (
