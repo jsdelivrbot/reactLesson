@@ -21,7 +21,7 @@ export default class TechStack extends Component {
   render() {
     return (
       <Provider store = {createStore(reducers)}>
-        <View>
+        <View style = {{ flex: 1 }}>
           <Header headerText = "Tech Stack" />
           <LibraryList />
         </View>

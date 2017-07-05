@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {View, ListView} from 'react-native';
+import ListItem from './ListItem';
+
 
 class LibraryList extends Component {
     state = {  }
@@ -10,10 +12,13 @@ class LibraryList extends Component {
         });
         this.dataSource = ds.cloneWithRows(this.props.libriries)
     }
-    renderRow() {
-        
+    renderRow(library) {
+        return (
+            <ListItem library = { library }/>
+        );
     }
     render() {
+        // console.log("this.props = ", this.props)
         return (
             <ListView 
                 dataSource = {this.dataSource}
@@ -24,9 +29,12 @@ class LibraryList extends Component {
 }
 
 const mapStateToProps = state => {
+    // console.log("state = ", state)
     return {
         libriries: state.libriries
     }
 }
+
+
 
 export default connect(mapStateToProps)(LibraryList);
