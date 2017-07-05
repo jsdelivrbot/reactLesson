@@ -1,0 +1,10 @@
+{
+  "name": "manager",
+  "displayName": "manager",
+   "expo": {
+    "sdkVersion": "17.0.0",
+    "packagerOpts": {
+      "assetExts": ["ttf"]
+    }
+  }
+}
