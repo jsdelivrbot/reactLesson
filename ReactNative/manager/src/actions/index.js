@@ -1,6 +1,12 @@
 import firebase from 'firebase';
-
-import { EMAIL_CHANGED,PASSWORD_CHANGED } from './types';
+import { Actions } from 'react-native-router-flux';
+import { 
+    EMAIL_CHANGED,
+    PASSWORD_CHANGED,
+    LOGIN_USER_SUCCESS,
+    LOGIN_USER_FAIL,
+    LOGIN_USER_PENDING
+ } from './types';
 
 export const emailChanged = (text)=> {
     return {
@@ -17,7 +23,30 @@ export const passwordChanged = (text)=> {
 
 export const loginUser = ({ email, password })=> {
     return (dispatch)=> {
-        firebase.autth().signInWithEmailAndPassword(email, password)
-            .then(user=> console.log(user));
+        dispatch({
+            type: LOGIN_USER_PENDING
+        })
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(user=> loginUserSuccess(dispatch, user))
+            .catch(()=> {
+                firebase.auth().createUserWithEmailAndPassword(email, password)
+                    .then(user => loginUserSuccess(dispatch, user))
+                    .catch(err=> loginUserFail(dispatch, err))
+            });
     }
+}
+const loginUserSuccess = (dispatch, user) => {
+    dispatch({
+        type: LOGIN_USER_SUCCESS,
+        payload: user
+    });
+
+    Actions.employeeList();
+}
+
+const loginUserFail = (dispatch, err)=> {
+    dispatch({
+        type: LOGIN_USER_FAIL,
+        payload: `Lỗi đăng nhập: ${err}`
+    })
 }

@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import { Card, CardSection, Header, Input, Button  } from './commons';
-import { Text } from 'react-native';
+import { Card, CardSection, Header, Input, Button, Spinner  } from './commons';
+import { Text, View } from 'react-native';
 import {connect} from 'react-redux';
-import { emailChanged, passwordChanged } from '../actions';
+import { 
+    emailChanged, 
+    passwordChanged,
+    loginUser
+} from '../actions';
 
 class LoginForm extends Component {
     state = {  }
@@ -11,6 +15,38 @@ class LoginForm extends Component {
     }
     onPasswordChange(text) {
         this.props.passwordChanged(text);
+    }
+    onLoginPress() {
+        const {email, password, loginUser} = this.props;
+        loginUser({email, password});
+    }
+    renderMessage(){
+        const {error,user} = this.props;
+        if(error) {
+            return (
+                <Text style = {styles.erroMessage}>{error}</Text>
+            );
+        }
+        if(user) {
+            return (
+                    <Text style = {styles.successMessage}>Login successful</Text>
+               
+            );
+        }
+    }
+    renderButtonLogin() {
+        if(this.props.loading) {
+            return (
+                <Spinner size = 'small'/>
+            );
+        }
+        return (
+            <Button
+                onPress = {this.onLoginPress.bind(this)}
+            >
+                Login
+            </Button>
+        );
     }
     render() {
         const {email, password} = this.props;
@@ -33,22 +69,38 @@ class LoginForm extends Component {
                         value = { password }
                     />
                 </CardSection>
+                {this.renderMessage()}
                 <CardSection>
-                    <Button>
-                        Login
-                    </Button>
+                    {this.renderButtonLogin()}
                 </CardSection>
             </Card>
         );
     }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-    email: state.auth.email,
-    password: state.auth.password
-});
+const styles = {
+    erroMessage: {
+        color: 'red',
+        fontSize: 18
+    },
+    successMessage: {
+        color: 'green',
+        fontSize: 18
+    }
+}
+
+const mapStateToProps = (state, ownProps) => {
+    const {email, password, error, user, loading} = state.auth;
+    return {
+    email,
+    password,
+    error,
+    user,
+    loading
+}};
 
 export default connect(mapStateToProps, {
     emailChanged,
-    passwordChanged
+    passwordChanged,
+    loginUser
 })(LoginForm);
